@@ -1,0 +1,403 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0032)http://127.0.0.1:5500/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>招商银行小企业金融+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="./招商银行小企业金融+_files/bootstrap.min.css">
+	<script src="./招商银行小企业金融+_files/jquery.min.js.下载"></script>
+	<script src="./招商银行小企业金融+_files/bootstrap.min.js.下载"></script>
+    <!-- import Vue.js -->
+    <script src="./招商银行小企业金融+_files/vue.min.js.下载"></script>
+    <!-- import stylesheet -->
+    <link rel="stylesheet" href="./招商银行小企业金融+_files/iview.css">
+    <!-- import iView -->
+    <script src="./招商银行小企业金融+_files/iview.min.js.下载"></script>
+    <script src="./招商银行小企业金融+_files/vue"></script>
+    <style type="text/css">
+        .navBg {
+            background: url("../doc/Images/background2.png") repeat-x 0 0;
+            height: 450px;
+        }
+
+        .navBarDef {
+            height: 50px;
+            min-height: 50px;
+            border: none;
+        }
+
+        .cnt {
+            width: 60%;
+            min-width: 1200px;
+        }
+
+        body {
+            padding-top: 0px;
+            background-color: #f7f8fB;
+            position: relative;
+        }
+
+        .version {
+            /*font-size: 12px;*/
+            margin-left: 5px;
+
+            font-size:16px;
+            color:#506aff;
+            cursor:pointer;
+        }
+
+        .desSec1 {
+            position: relative;
+            height: 370px;
+        }
+
+        .downloadSec {
+            margin-top: 120px;
+            width: 501px;
+	        height: 250px;
+        }
+
+        .jumbotron {
+            background-color: #f1f1f1;
+        }
+
+         .jumbotron p {
+             font-size: 20px;
+        }
+
+        .darkerRow {
+            background: #f7f8fB;
+        }
+
+        .lighterRow {
+            background: #ffffff;
+        }
+
+        .jumbotron h1 {
+            color: #2a2b3d;
+            font-family: "PingFangSC-Regular";
+            font-size: 44px;
+        }
+
+        .prdDes {
+            color:#7b7c93;
+            font-family: "PingFangSC-Thin";
+            font-size: 20px;
+        }
+
+        .noCornerBtn {
+            border-radius: 0;
+            background-color: #007bfe;
+        }
+
+        .btnDiv {
+            margin-top: 35px;
+        }
+
+        #linkerDiv a {
+            font-size: 18px;
+            font-family: "Microsoft YaHei","黑体","宋体";
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+            #linkerDiv a:after {
+                display: inline-table;
+                content: ">  ";
+            }
+
+        .footer {
+            background-color: #1d2a47;
+            color: #fff;
+        }
+
+        .bLogo {
+            width: 36px;
+            height: 36px;
+            border: none;
+        }
+
+        .current {
+            border: 1px solid #fff;
+        }
+
+        #topNav > a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 18px;
+            padding: 5px;
+        }
+
+            #topNav > a:hover {
+                text-decoration: none;
+            }
+
+            #topNav > a:visited {
+                color: #fff;
+            }
+
+        .navigation {
+            min-width: 1000px;
+            margin: 10px auto 0;
+            width: 100%;
+            text-align: center;
+        }
+
+            .navigation .nav {
+                display: inline-block;
+                margin-right: 60px;
+            }
+
+        .nav h5 {
+            font-size: 14px;
+            font-family: "黑体";
+            color: #fff;
+            text-align: center;
+            padding-left: 7px;
+        }
+
+        .nav ul {
+            padding-left: 10px;
+        }
+
+            .nav ul > li {
+                list-style: none;
+                padding: 5px 2px;
+            }
+
+                .nav ul > li > a {
+                    font-family: "黑体";
+                }
+
+        .copyright {
+            font-weight: 800;
+            margin-top: 30px;
+            text-align: center;
+            font-family: "Microsoft YaHei","黑体";
+            font-size: 15px;
+        }
+
+        .rightHelp {
+            margin-left: 50px;
+            border-left: 1px solid #2e3a55;
+            display: inline-block;
+            padding-left: 100px;
+            padding-top: 50px;
+            vertical-align: bottom;
+            margin-bottom: 15px;
+        }
+
+        .rightHelpIE7 {
+            margin-left: 50px;
+            border-left: 1px solid #2e3a55;
+            display: inline-block;
+            padding-left: 100px;
+            padding-top: 50px;
+            vertical-align: bottom;
+            margin-bottom: 15px;
+            display: inline;
+        }
+
+        .rightHelp img {
+            vertical-align: baseline;
+            height: 40px;
+            margin-bottom: 50px;
+        }
+
+        .rightHelpIE7 img {
+            vertical-align: baseline;
+            height: 40px;
+            margin-bottom: 25px;
+            padding-bottom: 40px;
+        }
+
+        .divLine1 {
+            display: inline-block;
+            _zoom: 1;
+            _display: inline;
+            height:1px;
+            width:500px;
+            background-color:#e6e8ee;
+        }
+
+        .navigation .nav {
+            *display: inline;
+        }
+
+        .instruction1 {
+            /*padding-top: 11px;*/
+            /*padding-left: 10px;*/
+            padding-bottom: 10px;
+            font-size: 16px !important;
+            color:#494b5c;
+        }
+
+        .instruction2 {
+            padding-bottom: 11px;
+            /*padding-left: 10px;*/
+            font-size: 16px !important;
+            color:#494b5c;
+        }
+
+        .instruction-background {
+            width: 495px;
+            height: 38px;
+            font-family: PingFangSC-Regular;
+	        font-size: 16px;
+            line-height: 14px;
+            /*background-color: #e6f1fc;*/
+            border-radius: 4px;
+            color: #646ebb;
+            margin-top: 25px;
+            font-weight: normal;
+	        font-stretch: normal;
+        }
+
+        .btn-background{
+            width: 292px;
+	        height: 60px;
+	        background-color: #506aff;
+	        box-shadow: 0px 1px 6px 0px 
+		        rgba(0, 25, 170, 0.5);
+	        border-radius: 30px;
+            border:none;
+        }
+
+        .WordInBtn{
+            margin-top:18px;
+            margin-bottom:19px;
+            margin-left:24px;
+            width: 204px;
+	        height: 23px;
+	        font-family: PingFangSC-Light;
+	        font-size: 24px;
+	        font-weight: normal;
+	        font-stretch: normal;
+	        line-height: 19px;
+	        letter-spacing: 1px;
+	        color: #ffffff;
+        }
+
+        .btn-img{
+            width:28px;
+            height:28px;
+            margin-top:14px;
+            margin-bottom:16px;
+            
+            margin-left:11px;
+            
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        $().ready(function () {
+            $('body').scrollspy();
+            $('body').on('activate.bs.scrollspy', function () {
+                //alert($(this).attr(id));
+            })
+
+            var browser = navigator.appName
+            var b_version = navigator.appVersion
+            var version = b_version.split(";");
+            var trim_Version = version[1].replace(/[ ]/g, "");
+            if (browser == "Microsoft Internet Explorer" && (trim_Version == "MSIE6.0" || trim_Version == "MSIE7.0")) {
+                $("#logo").removeClass("rightHelp");
+                $("#logo").addClass("rightHelpIE7");
+                $("h5").css("padding-left", "50px");
+            }
+
+
+
+        });
+
+
+
+
+    </script>
+
+
+</head>
+<body data-spy="scroll" style="">
+
+    <div id="app" class="jumbotron darkerRow" style="min-width: 1000px;"><div class="container cnt"><div class="row" style="position: relative; min-width: 1200px; height: 650px;"><div class="col-md-8 desSec1" style="position: absolute; left: 50px; top: 0px;"><h1 class="prdName">招商银行小企业金融+</h1> <p class="prdDes" style="margin-top: 10px;"></p> <p class="prdDes">经营稳定助力计划 供应链助兴计划 高薪助航计划</p> <div class="divLine1" style="margin-bottom: 15px;"></div> <div class="row" style="margin-left: 32px;"><div class="col-md-3 instruction1" style="margin-top: 10px;"><p class="instruction1">特色产品:</p> <p class="instruction2">常规抵押贷</p> <p class="instruction2">法人房产按揭贷</p></div> <div class="col-md-5" style="margin-top: 9px;"><img src="./招商银行小企业金融+_files/LOGO.png" style="width: 70%; height: 70%;"> <br> <span style="margin-left: 5%; color: rgb(167, 21, 17); margin-top: 20px">扫一扫进入小企业金融+,了解更多信息</span></div></div> <div class="divLine1" style="margin-top: 2px;"></div> <div class="row"><div class="col-md-12" style="font-size: 15px; margin-left: 30px;"><span class=" prdName" style="margin-left: 180px; font-size: 20px;">办理须知</span> <br> <div class="row" style="margin-left: 20px;"><ul><li><span>准入条件:</span> <br> <span>1.企业持续经营2年以上或主要股东有2年以上同行业经营经验<p></p> <span>2.企业经营管理规范，企业及实际控制人资质信用良好<p></p> <span>3.企业经营情况良好，未出现连续性经营亏损<p></p></span></span></span></li> <li><span>担保条件:</span> <span>房产足值抵押及实际控制人连带责任担保</span></li> <li><span style="width: 300px;">抵押物范围:</span> <span>居住用房、办公用房、商业用房、工业厂房</span></li></ul></div></div></div></div> <div class="col-md-5" style="position: absolute; right: 0px;"><div id="myCarousel" class="carousel slide"><ol class="carousel-indicators"><li data-target="#myCarousel" data-slide-to="0" class="active"></li> <li data-target="#myCarousel" data-slide-to="1"></li> <li data-target="#myCarousel" data-slide-to="2"></li></ol> <div class="carousel-inner"><div class="item active"><img src="./招商银行小企业金融+_files/1.jpg" alt="First slide"></div> <div class="item"><img src="./招商银行小企业金融+_files/2.jpg" alt="Second slide"></div> <div class="item"><img src="./招商银行小企业金融+_files/3.jpg" alt="Third slide"></div></div> <a href="#myCarousel" role="button" data-slide="prev" class="left carousel-control"><span aria-hidden="true" class=" ivu-icon " style="font-size: 50px; margin-right: 20px; margin-top: 300px;"><</span> <span class="sr-only">Previous</span></a> <a href="#myCarousel" role="button" data-slide="next" class="right carousel-control"><span aria-hidden="true" class=" ivu-icon" style="font-size: 50px; margin-top: 300px;">></span> <span class="sr-only">Next</span></a></div></div></div> <div class="row"><div class="col-md-6" style="margin-left: 100px;"><button onclick="location.href = &#39;https://gtb.cmbchina.com/CmbBank_GTB/UI/Public/Login.aspx&#39;" type="button" class="btn-background"><span class="WordInBtn">企业APP网页版<img src="./招商银行小企业金融+_files/button@3x.png" class="btn-img"></span></button></div></div></div></div>
+
+    <div class="footer" style="padding-top: 20px; min-width: 1200px;">
+
+        <div class="navigation">
+            <div class="nav divLine2">
+                <h5>常用功能</h5>
+                <ul style="text-align: center;">
+                    <li><a target="_blank" href="http://market.cmbchina.com/personal/qyMobile/qyMobile/ubank/zhcx.html">账务查询</a></li>
+                    <li><a target="_blank" href="http://market.cmbchina.com/personal/qyMobile/qyMobile/ubank/zf.html">支付结算</a></li>
+                    <li><a target="_blank" href="http://market.cmbchina.com/personal/qyMobile/qyMobile/ubank/dfdk.html">代发代扣</a></li>
+                    <li><a target="_blank" href="http://market.cmbchina.com/personal/qyMobile/qyMobile/ubank/gjyw.html">国际业务</a></li>
+                </ul>
+            </div>
+
+            
+
+
+            <div class="nav">
+                <h5>友情链接</h5>
+                <ul>
+                    <li><a href="http://www.cmbchina.com/">招商银行</a></li>
+                    <li><a href="https://u.ebank.cmbchina.com/CmbBank_GenShell/UI/GenShellPC/Login/Login.aspx">企业网银公众版</a></li>
+                    <li><a href="https://u.ebank.cmbchina.com/CmbBank_MB/UI/">企业银行工资表</a></li>
+                    <li><a href="https://u.ebank.cmbchina.com/CmbBank_MB/UI/Public/">公众版</a></li>
+                </ul>
+            </div>
+
+            <div class="rightHelp" id="logo">
+                <img src="./招商银行小企业金融+_files/cmb.png">
+            </div>
+
+        </div>
+        <!--  <div class="copyright">&copy;版权所有     招商银行</div>-->
+
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+        })
+      </script>
+
+
+<!-- Code injected by live-server -->
+<script type="text/javascript">
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					head.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					head.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script></body></html>
