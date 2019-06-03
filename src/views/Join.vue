@@ -75,25 +75,20 @@
                                         data-vv-name="select"
                                         required
                                 ></v-select>
-                                <v-select
+                                <v-select v-if="select == 'BANK_USER'"
+                                        v-model="bank"
+                                        :items="banks"
+                                        :error-messages="errors.collect('banks')"
+                                        label="所属银行"
+                                        data-vv-name="select"
+                                ></v-select>
+                                <v-select v-if="select != 'BANK_USER'"
                                         v-model="region"
-                                        v-validate="'required'"
                                         :items="regions"
                                         :error-messages="errors.collect('region')"
                                         label="所属区县"
                                         data-vv-name="select"
-                                        required
                                 ></v-select>
-                                <v-checkbox
-                                        v-model="checkbox"
-                                        v-validate="'required'"
-                                        :error-messages="errors.collect('checkbox')"
-                                        value="1"
-                                        label="Option"
-                                        data-vv-name="checkbox"
-                                        type="checkbox"
-                                        required
-                                ></v-checkbox>
 
                                 <v-btn @click="submit">提交</v-btn>
                                 <v-btn @click="clear">重置</v-btn>
@@ -121,6 +116,8 @@
             mobile: '',
             select: null,
             region: null,
+            bank: null,
+            bankData: null,
             regions: [
                 '古城区',
                 '玉龙纳西族自治县',
@@ -137,6 +134,7 @@
                 'MUNICIPAL_DEP_USER',
                 'BANK_USER'
             ],
+            banks: [],
             checkbox: null,
             e1: false,
             e2: false,
@@ -177,14 +175,20 @@
 
         mounted () {
             this.$validator.localize('zh_cn', this.dictionary)
+            this.initialize()
         },
 
         methods: {
             submit () {
-                console.log(this.username)
                 this.$validator.validateAll().then(result => {
-                    console.log(this.username);
                     if(result) {
+                        let i = 0
+                        for(i in this.bankData){
+                            if(this.bankData[i].bankName == this.bank){
+                                this.orgId = this.bankData[i]._id
+                            }
+                        }
+
                         api.request('post', '/auth/signup', {
                             'username': this.username,
                             'name': this.name,
@@ -192,7 +196,8 @@
                             'email': this.email,
                             'mobile': this.mobile,
                             'region': this.region,
-                            'roles': [this.select]
+                            'roles': [this.select],
+                            'orgId': this.orgId
                         }).then(response => {
                             console.log(response)
                             if(response.status == 200){
@@ -201,6 +206,7 @@
                                 this.$router.push({ path: '/' })
                             }
                         })
+
                     }
                 })
             },
@@ -210,6 +216,15 @@
                 this.select = null
                 this.checkbox = null
                 this.$validator.reset()
+            },
+            initialize() {
+                api.request('get', '/banks', {}).then(response => {
+                    let i = 0
+                    this.bankData = response.data
+                    for(i in response.data){
+                        this.banks.push(response.data[i].bankName)
+                    }
+                })
             }
         }
     })

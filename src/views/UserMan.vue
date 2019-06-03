@@ -2,7 +2,7 @@
     <div id="app">
         <v-app id="inspire">
             <div>
-                <v-toolbar flat color="white">
+                <v-toolbar flat color="light-blue darken-4" dark>
                     <v-toolbar-title>系统用户管理</v-toolbar-title>
                     <v-divider
                             class="mx-2"
@@ -158,7 +158,14 @@
 
         methods: {
             initialize () {
-                this.users = this.$store.getters.getUserList;
+                //this.users = this.$store.getters.getUserList;
+                api.request('get','/users', {}).then(response => {
+                    if(response.status == 200){
+                        this.users = response.data
+                    }else{
+                        alert('数据加载失败')
+                    }
+                })
             },
 
             editItem (item) {

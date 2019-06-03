@@ -118,6 +118,21 @@ let router = new Router({
             path: '/loanProductAppMan',
             name: 'loanProductAppMan',
             component: () => import('./views/LoanProductAppMan.vue')
+        },
+        {
+            path: '/userInfo',
+            name: 'userInfo',
+            component: () => import('./views/UserInfo.vue')
+        },
+        {
+            path: '/loanProductAppFeedback',
+            name: 'loanProductAppFeedback',
+            component: () => import('./views/LoanProductAppFeedback.vue')
+        },
+        {
+            path: '/loanRequirementNew',
+            name: 'loanRequirementNew',
+            component: () => import('./views/LoanRequirementNew.vue')
         }
     ]
 });

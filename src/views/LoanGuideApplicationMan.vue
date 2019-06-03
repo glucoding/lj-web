@@ -2,7 +2,7 @@
     <div id="app">
         <v-app id="inspire">
             <div>
-                <v-toolbar flat color="white">
+                <v-toolbar flat color="light-blue darken-4" dark>
                     <v-toolbar-title>贷款引导资金申请列表</v-toolbar-title>
                     <v-divider
                             class="mx-2"
@@ -12,16 +12,15 @@
                     <v-spacer></v-spacer>
                     <v-dialog v-model="dialog" max-width="1000px">
                         <v-card>
-                            <v-card-title>
-                                <span class="headline">{{ formTitle }}</span>
-                            </v-card-title>
+                            <v-toolbar flat color="light-blue darken-4" dark>
+                                <v-toolbar-title>贷款引导资金申请信息</v-toolbar-title>
+                            </v-toolbar>
 
-                            <v-card-text>
+                            <v-card-text class="red--text">{{editedItem.appStatus|loanGuideAppFilter}}</v-card-text>
                                 <v-container grid-list-md>
-                                    <v-layout row align-center justify-center>
+                                    <v-layout column align-center justify-center>
                                         <v-flex xs12 sm12 md4 lg8>
-                                            <h2>民营企业信贷引导资金申请</h2>{{editedItem.appStatus|loanGuideAppFilter}}
-                                            <v-sapcer></v-sapcer>
+
                                             <v-card>
                                                 <!--<div id="app">-->
                                                 <form>
@@ -413,16 +412,152 @@
                                                 <!--</div>-->
                                             </v-card>
                                         </v-flex>
+                                        <v-flex ma-3>
+                                            <v-card flat>
+                                                <v-spacer></v-spacer>
+                                                <v-btn color="success" @click="audit" v-if="this.$store.getters.getUser.role != 'USER'">审核</v-btn>
+                                                <v-btn color="info" @click="close">取消</v-btn>
+                                                <v-btn color="info" @click="save" v-if="this.$store.getters.getUser.role == 'USER'">保存</v-btn>
+                                            </v-card>
+                                        </v-flex>
                                     </v-layout>
-                                </v-container>
-                            </v-card-text>
 
-                            <v-card-actions>
+                                </v-container>
+                        </v-card>
+                    </v-dialog>
+                    <v-dialog v-model="countyDialog" max-width="400px">
+                        <v-card>
+                            <v-toolbar
+                                    color="light-blue darken-4" dark
+                            >
+                                <v-toolbar-side-icon></v-toolbar-side-icon>
+                                <v-toolbar-title>信贷引导资金申请审核</v-toolbar-title>
                                 <v-spacer></v-spacer>
-                                <v-btn color="blue darken-1" flat @click="audit" v-if="this.$store.getters.getUser.role != 'USER'">审核</v-btn>
-                                <v-btn color="blue darken-1" flat @click="close">取消</v-btn>
-                                <v-btn color="blue darken-1" flat @click="save">保存</v-btn>
-                            </v-card-actions>
+                            </v-toolbar>
+                            <v-layout>
+                                <v-flex ma-3>
+                                    <v-textarea
+                                            outline
+                                            v-model="editedItem.countyComment"
+                                            :error-messages="errors.collect('countyComment')"
+                                            label="县区主管部门审核意见"
+                                            data-vv-name="countyComment"
+                                    ></v-textarea>
+                                </v-flex>
+                            </v-layout>
+                            <v-layout row align-center justify-center>
+                                <v-btn @click="onOk" color="success">审核通过</v-btn>
+                                <v-btn @click="close" color="error">审核不通过</v-btn>
+                            </v-layout>
+                        </v-card>
+                    </v-dialog>
+                    <v-dialog v-model="countyGroupDialog" max-width="400px">
+                        <v-card>
+                            <v-toolbar
+                                    color="light-blue darken-4" dark
+                            >
+                                <v-toolbar-side-icon></v-toolbar-side-icon>
+                                <v-toolbar-title>信贷引导资金申请审核</v-toolbar-title>
+                                <v-spacer></v-spacer>
+                            </v-toolbar>
+                            <v-layout>
+                                <v-flex ma-3>
+                                    <v-textarea
+                                            outline
+                                            v-model="editedItem.countyGuideGroupComment"
+                                            :error-messages="errors.collect('countyGuideGroupComment')"
+                                            label="县区领导小组审核意见"
+                                            data-vv-name="countyGuideGroupComment"
+                                    ></v-textarea>
+                                </v-flex>
+                            </v-layout>
+                            <v-layout row align-center justify-center>
+                                <v-btn @click="onOk" color="success">审核通过</v-btn>
+                                <v-btn @click="close" color="error">审核不通过</v-btn>
+                            </v-layout>
+                        </v-card>
+                    </v-dialog>
+                    <v-dialog v-model="municipalDialog" max-width="400px">
+                        <v-card>
+                            <v-toolbar
+                                    color="light-blue darken-4" dark
+                            >
+                                <v-toolbar-side-icon></v-toolbar-side-icon>
+                                <v-toolbar-title>信贷引导资金申请审核</v-toolbar-title>
+                                <v-spacer></v-spacer>
+                            </v-toolbar>
+                            <v-layout>
+                                <v-flex ma-3>
+                                    <v-textarea
+                                            outline
+                                            v-model="editedItem.municipalComment"
+                                            :error-messages="errors.collect('municipalComment')"
+                                            label="市主管部门审核意见"
+                                            data-vv-name="municipalComment"
+                                    ></v-textarea>
+                                </v-flex>
+                            </v-layout>
+                            <v-layout row align-center justify-center>
+                                <v-btn @click="onOk" color="success">审核通过</v-btn>
+                                <v-btn @click="close" color="error">审核不通过</v-btn>
+                            </v-layout>
+                        </v-card>
+                    </v-dialog>
+                    <v-dialog v-model="municipalDepDialog" max-width="400px">
+                        <v-card>
+                            <v-toolbar
+                                    color="light-blue darken-4" dark
+                            >
+                                <v-toolbar-side-icon></v-toolbar-side-icon>
+                                <v-toolbar-title>信贷引导资金申请审核</v-toolbar-title>
+                                <v-spacer></v-spacer>
+                            </v-toolbar>
+                            <v-layout>
+                                <v-flex ma-3>
+                                    <v-textarea
+                                            outline
+                                            v-model="editedItem.depComment"
+                                            :error-messages="errors.collect('depComment')"
+                                            label="市级相关科室审核意见"
+                                            data-vv-name="depComment"
+                                    ></v-textarea>
+                                </v-flex>
+                            </v-layout>
+                            <v-layout row align-center justify-center>
+                                <v-btn @click="onOk" color="success">审核通过</v-btn>
+                                <v-btn @click="close" color="error">审核不通过</v-btn>
+                            </v-layout>
+                        </v-card>
+                    </v-dialog>
+                    <v-dialog v-model="municipalGroupDialog" max-width="400px">
+                        <v-card>
+                            <v-toolbar
+                                    color="light-blue darken-4" dark
+                            >
+                                <v-toolbar-side-icon></v-toolbar-side-icon>
+                                <v-toolbar-title>信贷引导资金申请审核</v-toolbar-title>
+                                <v-spacer></v-spacer>
+                            </v-toolbar>
+                            <v-layout>
+                                <v-flex ma-3>
+                                    <v-textarea
+                                            outline
+                                            v-model="editedItem.municipalGuideGroupComment"
+                                            :error-messages="errors.collect('municipalGuideGroupComment')"
+                                            label="市领导小组审核意见"
+                                            data-vv-name="municipalGuideGroupComment"
+                                    ></v-textarea>
+                                </v-flex>
+                            </v-layout>
+                            <v-layout row align-center justify-center>
+                                <v-btn @click="onOk" color="success">审核通过</v-btn>
+                                <v-btn @click="close" color="error">审核不通过</v-btn>
+                            </v-layout>
+                        </v-card>
+                    </v-dialog>
+                    <v-dialog v-model="progressDialog" max-width="600px">
+                        <v-card>
+                            <loan-guide-app-progress-bar></loan-guide-app-progress-bar>
                         </v-card>
                     </v-dialog>
                 </v-toolbar>
@@ -453,6 +588,13 @@
                             </v-icon>
                             <v-icon
                                     medium
+                                    class="mr-2"
+                                    @click="checkProgress(props.item)"
+                            >
+                                update
+                            </v-icon>
+                            <v-icon
+                                    medium
                                     @click="deleteItem(props.item)"
                             >
                                 delete
@@ -470,11 +612,18 @@
 
 <script>
     import api from "../api"
+    import LoanGuideAppProgressBar from "../components/LoanGuideAppProgressBar"
 
     export default({
         // el: '#app',
         data: () => ({
             dialog: false,
+            countyDialog: false,
+            countyGroupDialog: false,
+            municipalDialog: false,
+            municipalGroupDialog: false,
+            municipalDepDialog: false,
+            progressDialog: false,
             headers: [
                 {
                     text: '序号',
@@ -581,6 +730,10 @@
                 '工商银行'
             ]
         }),
+
+        components: {
+          LoanGuideAppProgressBar
+        },
 
         computed: {
             formTitle () {
@@ -711,9 +864,28 @@
                 this.close()
             },
 
+            //1:user, 2:county, 3:county group, 4:municipal, 5: municipal dep, 6: municipal group
             audit() {
+                if(this.$store.getters.getUser.role == 'COUNTY_USER'){
+                    this.countyDialog = true
+                }else if(this.$store.getters.getUser.role == 'COUNTY_GROUP_USER'){
+                    this.countyGroupDialog = true
+                }else if(this.$store.getters.getUser.role == 'MUNICIPAL_USER'){
+                    this.municipalDialog = true
+                }else if(this.$store.getters.getUser.role == 'MUNICIPAL_DEP_USER'){
+                    this.municipalDepDialog = true
+                }else if(this.$store.getters.getUser.role == 'MUNICIPAL_GROUP_USER'){
+                    this.municipalGroupDialog = true
+                }
+            },
+
+            onOk() {
                 this.editedItem.appStatus ++
                 this.save()
+            },
+
+            checkProgress(item) {
+                this.progressDialog = true
             }
         }
     })

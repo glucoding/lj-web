@@ -1,6 +1,6 @@
 <template>
             <div>
-                <v-toolbar flat color="white">
+                <v-toolbar flat color="light-blue darken-4" dark>
                     <v-toolbar-title>文章管理</v-toolbar-title>
                     <v-divider
                             class="mx-2"

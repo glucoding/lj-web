@@ -8,16 +8,12 @@
         <v-layout row wrap>
             <v-flex ma-3>
                 <v-card>
-                    <v-toolbar color="light-blue darken-4" dark>>
+                    <v-toolbar color="light-blue darken-4" dark>
                         <v-toolbar-side-icon></v-toolbar-side-icon>
 
                         <v-toolbar-title>融资产品推荐/微型企业</v-toolbar-title>
 
                         <v-spacer></v-spacer>
-
-                        <v-btn icon>
-                            <v-icon>search</v-icon>
-                        </v-btn>
                     </v-toolbar>
 
                     <v-list two-line>
@@ -57,16 +53,12 @@
 
             <v-flex ma-3>
                 <v-card>
-                    <v-toolbar color="light-blue darken-4" dark>>
+                    <v-toolbar color="light-blue darken-4" dark>
                         <v-toolbar-side-icon></v-toolbar-side-icon>
 
                         <v-toolbar-title>融资产品推荐/小型企业</v-toolbar-title>
 
                         <v-spacer></v-spacer>
-
-                        <v-btn icon>
-                            <v-icon>search</v-icon>
-                        </v-btn>
                     </v-toolbar>
 
                     <v-list two-line>
@@ -108,16 +100,12 @@
         <v-layout row wrap>
             <v-flex ma-3>
                 <v-card>
-                    <v-toolbar color="light-blue darken-4" dark>>
+                    <v-toolbar color="light-blue darken-4" dark>
                         <v-toolbar-side-icon></v-toolbar-side-icon>
 
                         <v-toolbar-title>融资产品推荐/大、中型企业</v-toolbar-title>
 
                         <v-spacer></v-spacer>
-
-                        <v-btn icon>
-                            <v-icon>search</v-icon>
-                        </v-btn>
                     </v-toolbar>
 
                     <v-list two-line>
@@ -157,16 +145,13 @@
 
                 <v-flex ma-3>
                     <v-card>
-                        <v-toolbar color="light-blue darken-4" dark>>
+                        <v-toolbar color="light-blue darken-4" dark>
                             <v-toolbar-side-icon></v-toolbar-side-icon>
 
                             <v-toolbar-title>融资产品推荐/个体工商户</v-toolbar-title>
 
                             <v-spacer></v-spacer>
 
-                            <v-btn icon>
-                                <v-icon>search</v-icon>
-                            </v-btn>
                         </v-toolbar>
 
                         <v-list two-line>
@@ -256,7 +241,7 @@
                                 this.itemsMicro.push({
                                     avatar: 'http://localhost:8081/uploads/' + this.microItems[i].img,
                                     title: this.microItems[i].name,
-                                    subtitle: "<span class='text--primary'>利率水平:" + this.microItems[i].interestRate + "</span> &mdash;" + this.microItems[i].type,
+                                    subtitle: "<span class='text--primary'>利率水平:" + this.microItems[i].interestRate + "</span> &mdash;" + this.microItems[i].orgName,
                                     id: this.microItems[i]._id
                                 })
                                 this.itemsMicro.push({ divider: true, inset: true })
@@ -267,7 +252,7 @@
                             this.itemsSmall.push({
                                 avatar: 'http://localhost:8081/uploads/' + this.smallItems[i].img,
                                 title: this.smallItems[i].name,
-                                subtitle: "<span class='text--primary'>利率水平：" + this.smallItems[i].interestRate + "</span> &mdash;" + this.smallItems[i].type,
+                                subtitle: "<span class='text--primary'>利率水平：" + this.smallItems[i].interestRate + "</span> &mdash;" + this.smallItems[i].orgName,
                                 id: this.smallItems[i]._id
                             })
                             this.itemsSmall.push({ divider: true, inset: true })
@@ -278,7 +263,7 @@
                             this.itemsBig.push({
                                 avatar: 'http://localhost:8081/uploads/' + this.bigItems[i].img,
                                 title: this.bigItems[i].name,
-                                subtitle: "<span class='text--primary'>利率水平：" + this.bigItems[i].interestRate + "</span> &mdash;" + this.bigItems[i].type,
+                                subtitle: "<span class='text--primary'>利率水平：" + this.bigItems[i].interestRate + "</span> &mdash;" + this.bigItems[i].orgName,
                                 id: this.bigItems[i]._id
                             })
                             this.itemsBig.push({ divider: true, inset: true })
@@ -289,7 +274,7 @@
                             this.itemsPersonal.push({
                                 avatar: 'http://localhost:8081/uploads/' + this.personalItems[i].img,
                                 title: this.personalItems[i].name,
-                                subtitle: "<span class='text--primary'>利率水平：" + this.personalItems[i].interestRate + "</span> &mdash;" + this.personalItems[i].type,
+                                subtitle: "<span class='text--primary'>利率水平：" + this.personalItems[i].interestRate + "</span> &mdash;" + this.personalItems[i].orgName,
                                 id: this.personalItems[i]._id
                             })
                             this.itemsPersonal.push({ divider: true, inset: true })

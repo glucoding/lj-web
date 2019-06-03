@@ -337,8 +337,8 @@
         mounted () {
             this.$validator.localize('zh_cn', this.dictionary)
             //获取当前用户所属企业名称
-            api.request('get', '/enterprises/' + this.$store.getters.getUser.orgId, {}).then(response => {
-                this.orgName = response.data.entName
+            api.request('get', '/banks/' + this.$store.getters.getUser.orgId, {}).then(response => {
+                this.orgName = response.data.bankName
             })
         },
 

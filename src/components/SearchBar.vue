@@ -1,12 +1,8 @@
 <template>
     <v-card>
+        <dialog v-model="dialog" max-width="1000px">hahah</dialog>
         <v-layout row>
-        <v-flex sm1 md2 lg2 ma-3>
-        <v-avatar color="indigo">
-            <v-icon dark>account_circle</v-icon>
-        </v-avatar>
-        </v-flex>
-        <v-flex sm1 md2 lg2 ma-3>
+        <v-flex ma-3>
             <v-card-title>查询适合您的融资产品</v-card-title>
         </v-flex>
         </v-layout>
@@ -17,7 +13,7 @@
                     <v-select
                             v-model="bank"
                             :items="banks"
-                            label="金融结构"
+                            label="金融机构"
                             data-vv-name="bank"
                     ></v-select>
                 </v-flex>
@@ -61,6 +57,7 @@
 
     export default {
         data: () => ({
+            dialog: false,
             bank: '',
             type: '',
             serviceFor: '',
@@ -91,13 +88,13 @@
                 '保证'
             ],
             banks: [
-                '富滇银行',
-                '工行银行',
+                '富滇银行丽江分行',
+                '工商银行丽江分行',
                 '富滇村镇银行',
                 '邮储银行',
-                '招商银行',
-                '中国银行',
-                '农业银行',
+                '招商银行丽江分行',
+                '中国银行丽江分行',
+                '农业银行丽江分行',
                 "农开行",
                 "信用合作社"
             ]
@@ -105,12 +102,13 @@
         methods: {
             onsubmit() {
                 api.request('post', '/loanProductByCondition',{
-                    'name': this.bank,
+                    'orgName': this.bank,
                     'type': this.type,
                     'serviceFor': this.serviceFor,
                     'guaranteeBy': this.guaranteeBy
                 }).then(response => {
                     console.log(response.data)
+                    this.dialog = true
                 })
             }
         }

@@ -529,7 +529,7 @@
                         }).then(response => {
                             console.log(response)
                             if(response.status == 200){
-                                alert('新产品添加成功')
+                                alert('申请提交成功')
                                 console.log(response.data)
                                 this.$router.push({ path: '/' })
                             }

@@ -16,8 +16,26 @@
         components: {
             AppNavigation
         }
+        /*provide() {
+            reload:this.reload
+        },
+        data() {
+            return {
+                isRouterAlive: true
+            }
+        },
+        methods: {
+            reload() {
+                this.isRouterAlive = false
+                this.$nextTick(()=> {
+                    this.isRouterAlive = true
+                })
+            }
+        }*/
     };
 </script>
 
 <style>
+    html { font-size: 80% } div { font-size: 1rem; }
+    body {font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;}
 </style>

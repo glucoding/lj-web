@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <div>
-            <v-toolbar flat color="white">
+            <v-toolbar flat color="light-blue darken-4" dark>
                 <v-toolbar-title>融资产品管理</v-toolbar-title>
                 <v-divider
                         class="mx-2"
@@ -10,9 +10,6 @@
                 ></v-divider>
                 <v-spacer></v-spacer>
                 <v-dialog v-model="dialog" max-width="700px">
-                    <template v-slot:activator="{ on }">
-                        <v-btn color="primary" dark class="mb-2" v-on="on">新增融资产品</v-btn>
-                    </template>
                     <v-card>
                         <v-layout row align-center justify-center>
                             <v-flex xs12 sm12 md4 lg8>
@@ -20,7 +17,7 @@
                                         color="light-blue darken-4" dark
                                 >
                                     <v-toolbar-side-icon></v-toolbar-side-icon>
-                                    <v-toolbar-title>新增融资产品</v-toolbar-title>
+                                    <v-toolbar-title>融资申请书</v-toolbar-title>
                                     <v-spacer></v-spacer>
                                     <v-btn icon>
                                         <v-icon>search</v-icon>
@@ -335,9 +332,10 @@
                                                 <v-card flat>
                                                     <v-layout column align-center justify-center>
                                                         <v-flex ma-3>
-                                                            <v-btn @click="submit" color="success">提交</v-btn>
-                                                            <v-btn @click="audit" color="error">审核</v-btn>
-                                                            <v-btn @click="clear" color="warning">重置</v-btn>
+                                                            <v-btn @click="submit" color="success" v-if="this.$store.getters.getUser.role=='USER'">提交修改</v-btn>
+                                                            <v-btn @click="audit" color="error" v-if="this.$store.getters.getUser.role=='BANK_USER'">审核</v-btn>
+                                                            <v-btn @click="checkBackground" color="info" v-if="this.$store.getters.getUser.role=='BANK_USER'">背景调查</v-btn>
+                                                            <v-btn @click="close" color="info">返回</v-btn>
                                                         </v-flex>
                                                     </v-layout>
                                                 </v-card>
@@ -345,6 +343,170 @@
                                         </v-card>
                                     </form>
                                 </div>
+                            </v-flex>
+                        </v-layout>
+                    </v-card>
+                </v-dialog>
+                <v-dialog v-model="dialog2" max-width="400px">
+                    <v-card>
+                        <v-toolbar
+                                color="light-blue darken-4" dark
+                        >
+                            <v-toolbar-side-icon></v-toolbar-side-icon>
+                            <v-toolbar-title>融资申请审核</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                        </v-toolbar>
+                        <v-layout>
+                            <v-flex ma-3>
+                                <v-textarea
+                                        outline
+                                        v-model="editedItem.remark"
+                                        v-validate="'required|max:10'"
+                                        :error-messages="errors.collect('remark')"
+                                        label="审核意见"
+                                        data-vv-name="remark"
+                                        required
+                                ></v-textarea>
+                            </v-flex>
+                        </v-layout>
+                        <v-layout row align-center justify-center>
+                            <v-btn @click="audit" color="success">审核通过</v-btn>
+                            <v-btn @click="audit" color="error">审核不通过</v-btn>
+                        </v-layout>
+                    </v-card>
+                </v-dialog>
+                <v-dialog v-model="dialog3" max-width="600px">
+                    <v-card>
+                        <progress-bar></progress-bar>
+                    </v-card>
+                </v-dialog>
+                <v-dialog v-model="dialog4" v-if="ent!=null" max-width="400px">
+                    <v-card flat>
+                        <v-card-text>云南省市场监管网上办事大厅登录信息</v-card-text>
+                        <v-layout row>
+                            <v-flex ma-3>
+                                <v-text-field
+                                        v-model="ent.marketUsername"
+                                        v-validate="'required|max:20'"
+                                        :counter="20"
+                                        :error-messages="errors.collect('marketUsername')"
+                                        label="用户名"
+                                        data-vv-name="marketUsername"
+                                        required
+                                ></v-text-field>
+                            </v-flex>
+                            <v-flex ma-3>
+                                <v-text-field
+                                        v-model="ent.marketPassword"
+                                        v-validate="'required|max:10'"
+                                        :counter="10"
+                                        :error-messages="errors.collect('marketPassword')"
+                                        label="密码"
+                                        data-vv-name="marketPassword"
+                                        :append-icon="e1 ? 'visibility' : 'visibility_off'"
+                                        :append-icon-cb="() => (e1 = !e1)"
+                                        :type="e1 ? 'password' : 'text'"
+                                        counter
+                                ></v-text-field>
+                            </v-flex>
+                            <v-flex ma-3>
+                                <v-btn @click="open1" color="info">前往调查</v-btn>
+                            </v-flex>
+                        </v-layout>
+                    </v-card>
+                    <v-card flat>
+                        <v-card-text>云南省电子税务局登录信息</v-card-text>
+                        <v-layout row>
+                            <v-flex ma-3>
+                                <v-text-field
+                                        v-model="ent.taxUsername"
+                                        v-validate="'required|max:20'"
+                                        :counter="20"
+                                        :error-messages="errors.collect('taxUsername')"
+                                        label="用户名"
+                                        data-vv-name="taxUsername"
+                                ></v-text-field>
+                            </v-flex>
+                            <v-flex ma-3>
+                                <v-text-field
+                                        v-model="ent.taxPassword"
+                                        v-validate="'required|max:10'"
+                                        :counter="10"
+                                        :error-messages="errors.collect('taxPassword')"
+                                        label="密码"
+                                        data-vv-name="taxPassword"
+                                        :append-icon="e1 ? 'visibility' : 'visibility_off'"
+                                        :append-icon-cb="() => (e1 = !e1)"
+                                        :type="e1 ? 'password' : 'text'"
+                                        counter
+                                ></v-text-field>
+                            </v-flex>
+                            <v-flex ma-3>
+                                <v-btn @click="open2" color="info">前往调查</v-btn>
+                            </v-flex>
+                        </v-layout>
+                    </v-card>
+                    <v-card flat>
+                        <v-card-text>云南省劳动保障执法年审信息系统登录信息</v-card-text>
+                        <v-layout row>
+                            <v-flex ma-3>
+                                <v-text-field
+                                        v-model="ent.hrUsername"
+                                        v-validate="'required|max:20'"
+                                        :counter="20"
+                                        :error-messages="errors.collect('hrUsername')"
+                                        label="用户名"
+                                        data-vv-name="hrUsername"
+                                ></v-text-field>
+                            </v-flex>
+                            <v-flex ma-3>
+                                <v-text-field
+                                        v-model="ent.hrPassword"
+                                        v-validate="'required|max:10'"
+                                        :counter="10"
+                                        :error-messages="errors.collect('hrPassword')"
+                                        label="密码"
+                                        data-vv-name="hrPassword"
+                                        :append-icon="e1 ? 'visibility' : 'visibility_off'"
+                                        :append-icon-cb="() => (e1 = !e1)"
+                                        :type="e1 ? 'password' : 'text'"
+                                        counter
+                                ></v-text-field>
+                            </v-flex>
+                            <v-flex ma-3>
+                                <v-btn @click="open3" color="info">前往调查</v-btn>
+                            </v-flex>
+                        </v-layout>
+                    </v-card>
+                    <v-card flat>
+                        <v-card-text>云南电网网上营业厅登录信息</v-card-text>
+                        <v-layout row>
+                            <v-flex ma-3>
+                                <v-text-field
+                                        v-model="ent.electricUsername"
+                                        v-validate="'required|max:20'"
+                                        :counter="20"
+                                        :error-messages="errors.collect('electricUsername')"
+                                        label="用户名"
+                                        data-vv-name="electricUsername"
+                                ></v-text-field>
+                            </v-flex>
+                            <v-flex ma-3>
+                                <v-text-field
+                                        v-model="ent.electricPassword"
+                                        v-validate="'required|max:10'"
+                                        :counter="10"
+                                        :error-messages="errors.collect('electricPassword')"
+                                        label="密码"
+                                        data-vv-name="electricPassword"
+                                        :append-icon="e1 ? 'visibility' : 'visibility_off'"
+                                        :append-icon-cb="() => (e1 = !e1)"
+                                        :type="e1 ? 'password' : 'text'"
+                                        counter
+                                ></v-text-field>
+                            </v-flex>
+                            <v-flex ma-3>
+                                <v-btn @click="open4" color="info">前往调查</v-btn>
                             </v-flex>
                         </v-layout>
                     </v-card>
@@ -365,16 +527,23 @@
                     <td class="justify-center layout px-5">
                         <v-icon
                                 medium
-                                class="mr-2"
+                                class="fas fa-edit"
                                 @click="editItem(props.item)"
                         >
-                            edit
+                            &nbsp;
                         </v-icon>
                         <v-icon
                                 medium
+                                class="fas fa-trash-alt"
                                 @click="deleteItem(props.item)"
                         >
-                            delete
+                        </v-icon>
+                        <v-icon
+                                medium
+                                class="fas fa-hamsa"
+                                @click="progressView(props.item)"
+                        >
+
                         </v-icon>
                     </td>
                 </template>
@@ -388,10 +557,16 @@
 
 <script>
     import api from "../api"
+    import ProgressBar from "../components/ProgressBar"
 
     export default({
         data: () => ({
             dialog: false,
+            dialog2: false,
+            dialog3: false,
+            dialog4: false,
+            ent: null,
+            e1: true,
             headers: [
                 {
                     text: '序号',
@@ -522,6 +697,10 @@
             ]
         }),
 
+        components: {
+            ProgressBar
+        },
+
         computed: {
             formTitle () {
                 return this.editedIndex === -1 ? '新增' : '编辑'
@@ -571,7 +750,6 @@
                                         alert('产品名称加载失败')
                                     }
                                 })
-                                console.log(this.applications[i])
                             }
                         }else{
                             alert('申请数据加载失败')
@@ -583,6 +761,16 @@
             editItem (item) {
                 this.editedIndex = this.applications.indexOf(item)
                 this.editedItem = Object.assign({}, item)
+
+                api.request('get','/enterprises/'+ this.editedItem.entId).then(response => {
+                    if(response.status == 200){
+                        this.ent = response.data
+                    }else{
+                        alert('企业数据获取失败')
+                    }
+                    console.log(this.ent)
+                })
+
                 this.dialog = true
             },
 
@@ -601,6 +789,10 @@
                         }
                     })
                 }
+            },
+
+            progressView(item){
+                this.dialog3 = true
             },
 
             close () {
@@ -700,6 +892,24 @@
                     })
                 }
                 this.close()
+            },
+            audit() {
+                this.dialog2 = true
+            },
+            checkBackground() {
+                this.dialog4 = true
+            },
+            open1() {
+                window.location.href = "http://gsxt.ynaic.gov.cn/webportal1/g/xtsy,yhdl"
+            },
+            open2() {
+                window.location.href = "https://etax.yunnan.chinatax.gov.cn/zjgfdzswj/main/index.html"
+            },
+            open3() {
+                window.location.href = "http://220.165.251.18:8082/sjcj/login.jsp"
+            },
+            open4() {
+                window.location.href = "http://95598.yn.csg.cn"
             }
         }
     })

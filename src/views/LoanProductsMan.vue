@@ -1,7 +1,7 @@
 <template>
     <div id="app">
             <div>
-                <v-toolbar flat color="white">
+                <v-toolbar flat color="light-blue darken-4" dark>
                     <v-toolbar-title>融资产品管理</v-toolbar-title>
                     <v-divider
                             class="mx-2"
@@ -20,7 +20,7 @@
                                             color="light-blue darken-4" dark
                                     >
                                         <v-toolbar-side-icon></v-toolbar-side-icon>
-                                        <v-toolbar-title>新增融资产品</v-toolbar-title>
+                                        <v-toolbar-title>融资产品信息</v-toolbar-title>
                                         <v-spacer></v-spacer>
                                         <v-btn icon>
                                             <v-icon>search</v-icon>
@@ -394,8 +394,10 @@
 
         methods: {
             initialize () {
+                console.log('inside')
                 api.request('get','/loanProductByBank/' + this.$store.getters.getUser.orgId, {}).then(response => {
                     if(response.status == 200){
+                        console.log(response.data)
                         this.products = response.data
                     }else{
                         alert('数据加载失败')

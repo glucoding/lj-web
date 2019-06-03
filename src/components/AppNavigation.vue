@@ -29,7 +29,8 @@
                     </v-list-tile>
                   </v-list>
             </v-menu>
-            <v-btn flat class="hidden-sm-and-down" to="/supermarket">融资服务</v-btn>
+            <v-btn flat class="hidden-sm-and-down" to="/supermarket">金融超市</v-btn>
+            <v-btn flat class="hidden-sm-and-down" to="/loanRequirementNew">融资需求</v-btn>
             <v-btn flat class="hidden-sm-and-down" to="/enterpriseMan" v-if="this.$store.getters.getUser.role=='COUNTY_USER'|this.$store.getters.getUser.role=='MUNICIPAL_USER'">入库企业管理</v-btn>
             <v-btn flat class="hidden-sm-and-down" to="/userman" @click="showUsers()" v-if="this.$store.getters.getUser.role=='ADMIN'">用户管理</v-btn>
             <v-menu offset-y v-if="this.$store.getters.getUser.role=='ADMIN'">
@@ -206,40 +207,33 @@
                 ],
                 admins: [
                     ['用户管理', 'people_outline'],
-                    ['新闻发布','add'],
-                    ['新闻管理','insert_drive_file'],
-                    ['通知公告发布','add'],
-                    ['通知公告管理','insert_drive_file'],
-                    ['政策信息发布','add'],
-                    ['政策信息管理','insert_drive_file'],
-                    ['数据备份', 'settings']
-                ],
-                cruds: [
-                    ['Create', 'add'],
-                    ['Read', 'insert_drive_file'],
-                    ['Update', 'update'],
-                    ['Delete', 'delete']
+                    ['文章发布','fas fa-feather'],
+                    ['文章管理','fas fa-tasks'],
+                    ['数据备份', 'fas fa-database']
                 ],
                 users: [
-                    ['我的融资申请','add'],
-                    ['我的项目申请','add'],
-                    ['管理我的信息','add']
+                    ['我的融资申请','fas fa-feather'],
+                    ['我的项目申请','fas fa-tasks'],
+                    ['管理我的信息','fas fa-id-card-alt'],
+                    ['发布融资需求', 'fas fa-feather'],
+                    ['融资需求管理', 'fas fa-tasks']
                 ],
                 banks: [
-                    ['发布融资产品','add'],
-                    ['管理融资产品', 'add'],
-                    ['融资申请审核', 'add'],
-                    ['融资进度反馈','add']
+                    ['发布融资产品','fas fa-feather'],
+                    ['管理融资产品', 'fas fa-tasks'],
+                    ['融资申请审核', 'fas fa-user-check'],
+                    ['融资进度反馈','fas fa-comments']
 
                 ],
                 govs: [
-                    ['企业入库审核','add'],
-                    ['信贷引导资金申请审核','add'],
-                    ['风险补偿金申请审核','add'],
-                    ['贷款贴息转向资金申请审核','add'],
+                    ['企业入库审核','fas fa-user-check'],
+                    ['信贷引导资金申请审核','fas fa-user-check'],
+                    ['风险补偿金申请审核','fas fa-user-check'],
+                    ['贷款贴息转向资金申请审核','fas fa-user-check'],
                 ]
             };
         },
+        //inject: ['reload'],
         methods: {
             showUsers() {
                 console.log('dispatched');
@@ -284,6 +278,9 @@
             logout() {
                 this.$store.commit('userStatus', null)
                 this.$router.go(0)
+                //this.refresh()
+
+
             },
             onAdmin(i) {
                 switch(i){
@@ -291,29 +288,67 @@
                         this.$router.push({ path: '/userman' })
                         break
                     case 1:
+                        this.$router.push({ path: '/articleEdit' })
                         break
                     case 2:
+                        this.$router.push({ path: '/articleMan' })
                         break
                     case 3:
-                        break
-                    case 4:
-                        break
-                    case 5:
-                        break
-                    case 6:
-                        break
-                    case 7:
                         break
                 }
             },
             onUser(i) {
-
+                switch(i){
+                    case 0:
+                        this.$router.push({ path: '/loanProductAppMan' })
+                        break
+                    case 1:
+                        this.$router.push({ path: '/loanguideappman' })
+                        break
+                    case 2:
+                        this.$router.push({ path: '/userInfo' })
+                        break
+                    case 3:
+                        this.$router.push({ path: '/loanRequirementNew'})
+                        break
+                    case 4:
+                        this.$router.push({ path: '/loanRequirementMan'})
+                        break
+                }
             },
             onBank(i) {
-
+                switch(i){
+                    case 0:
+                        this.$router.push({ path: '/loanProductNew' })
+                        break
+                    case 1:
+                        this.$router.push({ path: '/loanProductsMan' })
+                        break
+                    case 2:
+                        this.$router.push({ path: '/loanProductAppMan' })
+                        break
+                    case 3:
+                        this.$router.push({ path: '/loanProductAppFeedback' })
+                        break
+                }
             },
             onGov(i) {
-
+                switch(i){
+                    case 0:
+                        this.$router.push({ path: '/enterpriseMan' })
+                        break
+                    case 1:
+                        this.$router.push({ path: '/loanGuideAppMan' })
+                        break
+                    case 2:
+                        this.$router.push({ path: '/articleMan' })
+                        break
+                    case 3:
+                        break
+                }
+            },
+            refresh() {
+                this.reload()
             }
         },
         computed: {
@@ -332,7 +367,6 @@
                 }else{
                     this.$store.commit('userStatus', null)
                 }
-                console.log(this.$store.getters.getIsLogin)
                 return this.$store.getters.getIsLogin
             }
         },

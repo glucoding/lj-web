@@ -6,6 +6,8 @@ import store from './store';
 import VeeValidate from 'vee-validate';
 import VueFroala from 'vue-froala-wysiwyg';
 import jQuery from 'jquery'
+import '@fortawesome/fontawesome-free/css/all.css'
+import moment from 'moment'
 
 require('froala-editor/js/froala_editor.pkgd.min')
 require('froala-editor/css/froala_editor.pkgd.min.css')
@@ -19,9 +21,12 @@ const Vuetify = require('vuetify');
 
 
 Vue.use(VeeValidate);
-Vue.use(Vuetify);
+Vue.use(Vuetify, {
+    iconfont: 'fa'
+});
 Vue.use(VueFroala);
 Vue.use(jQuery);
+Vue.use(moment);
 
 window.jQuery = window.$ = jQuery
 //window.$ = jQuery
